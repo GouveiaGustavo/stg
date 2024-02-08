@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  node:
+    container_name: "apocalipse_node"
+    build: .
+    ports:
+      - "1112:1112"
+    restart: always
+    volumes:
+      - ./:/var/www/apocalipse
+      - /var/www/apocalipse/node_modules
+      - .env:/var/www/apocalipse/.env
+    environment:
+        DOCKER_NODE_ENV: ${NODE_ENV}
+    networks:
+     default:
+        ipv4_address: 172.30.0.5
+
+networks:
+  default:
+    external:
+      name: infraestrutura_net
